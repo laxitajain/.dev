@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="laxita@debian — Personal website of Laxita" />
+  <meta property="og:title" content="laxita@laxita.dev" />
+  <meta property="og:description" content="Personal website of Laxita — fastfetch style" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://laxita.dev" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <title>laxita@laxita.dev</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0a0a08;
+      --text: #d4c5a9;
+      --accent: #c8903a;
+      --accent-dim: #a06b1f;
+      --muted: #6b5c47;
+      --link-hover-bg: #c8903a;
+      --link-hover-fg: #0a0a08;
+    }
+
+    body {
+      font-family: "JetBrains Mono", "Roboto Mono", monospace;
+      font-size: 14px;
+      line-height: 1.5;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    ::-moz-selection {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    a:hover {
+      background-color: var(--link-hover-bg);
+      color: var(--link-hover-fg);
+    }
+
+    .terminal {
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      flex: 1;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .prompt-line {
+      margin-bottom: 1.5rem;
+    }
+
+    .prompt-user {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .prompt-separator {
+      color: var(--text);
+    }
+
+    .prompt-path {
+      color: #e8b84b;
+      font-weight: 700;
+    }
+
+    .prompt-dollar {
+      color: var(--text);
+    }
+
+    .prompt-cmd {
+      color: var(--text);
+    }
+
+    .fastfetch {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .ascii-art {
+      color: var(--accent);
+      white-space: pre;
+      font-size: 5.5px;
+      line-height: 1.15;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .info-header {
+      font-weight: 700;
+      margin-bottom: 0;
+    }
+
+    .info-header .user {
+      color: var(--accent);
+    }
+
+    .info-header .at {
+      color: var(--text);
+    }
+
+    .info-header .host {
+      color: var(--accent);
+    }
+
+    .info-separator {
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .info-row {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .info-label {
+      color: var(--accent);
+      font-weight: 700;
+      min-width: 0;
+      margin-right: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .info-value {
+      color: var(--text);
+    }
+
+    .info-value a {
+      font-weight: 400;
+    }
+
+    .color-blocks {
+      display: flex;
+      gap: 0;
+      margin-top: 1rem;
+    }
+
+    .color-block {
+      width: 3ch;
+      height: 1.5em;
+      display: inline-block;
+    }
+
+    .section-gap {
+      height: 0.75rem;
+    }
+
+    .footer {
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0.5rem 1.5rem 1rem;
+    }
+
+    .footer-prompt {
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-prompt .cursor-block {
+      display: inline-block;
+      width: 0.6em;
+      height: 1.15em;
+      background: var(--text);
+      margin-left: 2px;
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+
+    .help-overlay {
+      display: none;
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      flex: 1;
+    }
+
+    .help-overlay h2 {
+      color: var(--accent);
+      font-size: 14px;
+      margin-bottom: 0.5rem;
+    }
+
+    .help-overlay p {
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .help-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .help-key {
+      color: var(--accent);
+      font-weight: 700;
+      display: inline-block;
+      min-width: 6ch;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        font-size: 12px;
+      }
+
+      .fastfetch {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .ascii-art {
+        font-size: 3.5px;
+        line-height: 1.1;
+        text-align: center;
+      }
+
+      .terminal {
+        padding: 1rem;
+      }
+
+      .footer {
+        padding: 0.5rem 1rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="help-overlay" id="helpContainer">
+    <div class="help-section">
+      <h2>KEY BINDINGS</h2>
+      <p><span class="help-key">h</span>show help</p>
+      <p><span class="help-key">q</span>go back</p>
+      <p><span class="help-key">j</span>scroll down</p>
+      <p><span class="help-key">k</span>scroll up</p>
+      <p><span class="help-key">gg</span>scroll to top</p>
+      <p><span class="help-key">G</span>scroll to bottom</p>
+      <p><span class="help-key">1-9</span>relative movements</p>
+    </div>
+    <div class="help-section">
+      <h2>COMMANDS</h2>
+      <p>Type in the prompt below:</p>
+      <p><span class="help-key">help</span>show this help</p>
+      <p><span class="help-key">fastfetch</span>reload the page</p>
+      <p><span class="help-key">clear</span>clear and reload</p>
+    </div>
+    <div class="help-section">
+      <h2>SOURCE</h2>
+      <p><a href="https://github.com/laxita/laxita.github.io">https://github.com/laxita/laxita.github.io</a></p>
+    </div>
+  </div>
+
+  <div class="terminal" id="mainContainer">
+    <div class="prompt-line">
+      <span class="prompt-user">laxita@debian</span><span class="prompt-separator">:</span><span class="prompt-path">~</span><span class="prompt-dollar">$ </span><span class="prompt-cmd">fastfetch</span>
+    </div>
+
+    <div class="fastfetch">
+      <div class="ascii-art" aria-hidden="true">
+                               -.-+#-...
+                            -+-...   --#+--.
+                          -++-+++++- . .--+#..
+                          -###   #+#. -. ++++--
+                         +##      ##+ ..-.##.##+                   -+
+                          ##      ##-...+#+++-#+-     --           ##+
+                                 ###+  .-+- --++-     +#+          +###+
+                               +###+.       +#+#+     ###+-     ++-##++##
+                         --+###++-.   .-..-###-##     +#++#####++. ..--+##
+                   .-###+-+++.      .--+++##+--#+      ##+  +###++-...   .--
+                --+++#+--++#--.      .---++. -##+     ##+-.+- #+++.... . .. --
+             .-#+--+-.....---.--. ...-+#-+--.-##      +#--.-+#-++#+...    .-..-
+            .+#--.-.     .     .-+##+####+#+###       +#+. +###-+#--..  .....-.--
+          .-##+##-##-.--.      .+-+#--+######+     ++#+#++ .##+.++---.        .--
+         -++###++---.--...  .--++---###++####+####+##+###++..+--..-..  .    .. -+-
+        -++##-.       ....++##+++-+++###+-----+++-+++###+##+-+-.- --+.----.  .. .-+
+       .#+- .--..          -.-++######+.  . .-+-.--#++#########--.----.    -+  .  .-
+       -##--+----...-     ..--##+##----.    .--..-..++###+###-+++-..-+#####.--  . ..
+      .-#+#+.++-..-+....---+-####--+..  .   .-. .+-+++#######-...-....+#####.+. .. .-
+      -++++.+-   --...--+#++++##-+--...     ...  . .+########+-++..  . .+###--.. ..--
+      -#--+- .. -.      -+#####+-.     .     --...-.-.-######++...    .....        .++
+      -#+..-+#-.+....--.-####++#+...  . ..    .    .++++#####+--++#---.    . .. ..-+.+
+      -++.++--+++...-+--.###+-.-...     .   ...   .. --+##++####++#++--- .-.-.  .######
+      -#+##+#..+-  -+###++##-+-  -...           ..   .-.++#########+#+##+---.-----###########
+      -+####--..   .+######++-  -.  .. .  .. .. . -   ..-..-+######++++#####+++#####--#####
+      -++#++-.--  -..-+###++-.. .     .  +.  -  .  . .--...  -++---+#########--##+###-###++#
+       -#+-++-++--------##-+.... ..     ... .......#+-----..     . .     ....  ..+########++
+       +##++#-+#+.-###++#-++-..         .-  --.-+++++#++.-+--..-- .....-...  . .-+++#######
+        -#####-....-#####--+-.    . .    .  .- .++-+###++----.--.      ...-+#########+###
+         #####---+--+####---.-      ...  .   .-... -####+#--..---.--+-++++###++--+####
+         ++##+--##++##+##+---.-.     ..    . .... .  -########++++++++###
+          #+#+####++-####-+--+...  .  .      . -   .  .###############
+            ######+.-++##+#.+.-.. . .   .    .-       .-.####++######
+             ####+-#+#####+#--+... ..  .  .   .   .-  .- -####+######
+                ##########+#++-.. ....        - .      .--+###+###+#
+                  #########+##+-+--.-......-..  .     .#--+###+####
+                      ######+##-+----.--.-..-. --- -+-.+--+#######
+                         ######-+--+.+------+-++-----+.+-+######
+                             ##+#++++--+#+#++-++-++.+++#-######
+                               ###+++###+######+++--.+#+####
+                                 ##++++#+######++####+-#
+                                    #########++#+++++
+                                          #######
+</div>
+
+      <div class="info">
+        <div class="info-header">
+          <span class="user">laxita</span><span class="at">@</span><span class="host">laxita.dev</span>
+        </div>
+        <div class="info-separator">-------------------</div>
+
+        <div class="info-row"><span class="info-label">OS:</span><span class="info-value">Debian GNU/Linux (sid)</span></div>
+        <div class="info-row"><span class="info-label">Host:</span><span class="info-value">laxita.dev</span></div>
+        <div class="info-row"><span class="info-label">Kernel:</span><span class="info-value">6.12.88+deb13-amd64</span></div>
+        <div class="info-row"><span class="info-label">Uptime:</span><span class="info-value">22 years</span></div>
+        <div class="info-row"><span class="info-label">Packages:</span><span class="info-value">python3, javascript, rust, go</span></div>
+        <div class="info-row"><span class="info-label">Shell:</span><span class="info-value">zsh 5.9</span></div>
+        <div class="info-row"><span class="info-label">Editor:</span><span class="info-value">neovim</span></div>
+        <div class="info-row"><span class="info-label">Terminal:</span><span class="info-value">alacritty</span></div>
+        <div class="info-row"><span class="info-label">WM:</span><span class="info-value">i3</span></div>
+
+        <div class="section-gap"></div>
+
+        <div class="info-row">
+          <span class="info-label">Projects:</span>
+          <span class="info-value">
+            <!-- <a href="#">git-cliff</a>,
+            <a href="#">tuitar</a>,
+            <a href="#">binsider</a>,
+            <a href="#">systeroid</a>,
+            <a href="#">kmon</a> -->
+          </span>
+        </div>
+        <div class="info-row">
+          <span class="info-label"></span>
+          <!-- <span class="info-value">
+            <a href="#">menyoki</a>,
+            <a href="#">runst</a>,
+            <a href="#">halp</a>,
+            <a href="#">gpg-tui</a>,
+            <a href="#">rustypaste</a> -->
+          </span>
+        </div>
+        <div class="info-row">
+          <span class="info-label"></span>
+          <!-- <span class="info-value">
+            <a href="#">daktilo</a>,
+            <a href="#">linuxwave</a>,
+            <a href="#">coolmodfiles</a>,
+            <a href="#">more...</a> -->
+          </span>
+        </div>
+
+        <div class="section-gap"></div>
+
+        <div class="info-row"><span class="info-label">GitHub:</span><span class="info-value"><a href="#">github.com/laxita</a></span></div>
+        <div class="info-row"><span class="info-label">Blog:</span><span class="info-value"><a href="#">blog.laxita.dev</a></span></div>
+        <div class="info-row"><span class="info-label">Resume:</span><span class="info-value"><a href="#">laxita.dev/resume</a></span></div>
+
+        <div class="section-gap"></div>
+
+        <div class="info-row"><span class="info-label">Contact:</span><span class="info-value">
+          <a href="#">email</a>,
+          <a href="#">x</a>,
+          <a href="#">linkedin</a>,
+          <a href="#">discord</a>,
+          <a href="#">mastodon</a>,
+          <a href="#">bsky</a>
+        </span></div>
+        <div class="info-row"><span class="info-label">Donate:</span><span class="info-value">
+          <a href="#">github sponsors</a>,
+          <a href="#">patreon</a>,
+          <a href="#">buymeacoffee</a>
+        </span></div>
+
+        <div class="color-blocks">
+          <span class="color-block" style="background:#0a0a08"></span>
+          <span class="color-block" style="background:#c8903a"></span>
+          <span class="color-block" style="background:#a06b1f"></span>
+          <span class="color-block" style="background:#e8b84b"></span>
+          <span class="color-block" style="background:#d4c5a9"></span>
+          <span class="color-block" style="background:#6b5c47"></span>
+          <span class="color-block" style="background:#8b6914"></span>
+          <span class="color-block" style="background:#f5deb3"></span>
+        </div>
+        <div class="color-blocks">
+          <span class="color-block" style="background:#1a1610"></span>
+          <span class="color-block" style="background:#daa54e"></span>
+          <span class="color-block" style="background:#b87820"></span>
+          <span class="color-block" style="background:#f0c966"></span>
+          <span class="color-block" style="background:#ede0cc"></span>
+          <span class="color-block" style="background:#8a7d6b"></span>
+          <span class="color-block" style="background:#a0842a"></span>
+          <span class="color-block" style="background:#d4a04a"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-prompt">
+      <span class="prompt-user">laxita@debian</span><span class="prompt-separator">:</span><span class="prompt-path">~</span><span class="prompt-dollar">$ </span><span id="promptInput" class="prompt-cmd"></span><span class="cursor-block" id="cursorBlock"></span>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
