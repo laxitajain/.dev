@@ -574,7 +574,7 @@ const COMMANDS = {
       localStorage.setItem("sound", "on");
       getAudioCtx(); // create the audio context while we have a user gesture
       playClick(true);
-      printText("sound: on (keyboard clicks + terminal bell)");
+      printText("sound: on");
     } else if (args[0] === "off") {
       soundEnabled = false;
       localStorage.setItem("sound", "off");
