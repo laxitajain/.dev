@@ -1,9 +1,6 @@
-<p align="center">
-  <img src="images/acorn.png" alt="acorn" width="72">
-</p>
-
-<h1 align="center">ssh laxita@laxita.dev</h1>
-
+<h1 align="center">
+  <img src="images/acorn.png" alt="" width="44" style="vertical-align: -6px;"> linux-based terminal portfolio
+</h1>
 <p align="center">
   A terminal-style personal site — browse projects, chase hidden acorns, and pretend you're on Debian.
 </p>
