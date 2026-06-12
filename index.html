@@ -25,6 +25,7 @@
       --text: #d4c5a9;
       --accent: #c8903a;
       --accent-dim: #a06b1f;
+      --accent-bright: #f0c966;
       --muted: #6b5c47;
       --link-hover-bg: #c8903a;
       --link-hover-fg: #0a0a08;
@@ -32,6 +33,7 @@
 
     body {
       font-family: "JetBrains Mono", "Roboto Mono", monospace;
+      font-variant-ligatures: none;
       font-size: 14px;
       line-height: 1.5;
       background-color: var(--bg);
@@ -82,7 +84,7 @@
     }
 
     .prompt-line {
-      margin-bottom: 1.5rem;
+      word-break: break-all;
     }
 
     .prompt-user {
@@ -105,16 +107,48 @@
 
     .prompt-cmd {
       color: var(--text);
+      white-space: pre-wrap;
+    }
+
+    .entry {
+      margin-bottom: 0.25rem;
+    }
+
+    .output {
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin-bottom: 0.75rem;
+    }
+
+    .output.pre {
+      white-space: pre;
+      word-break: normal;
+      overflow-x: auto;
+    }
+
+    .output .dir-name {
+      color: var(--accent-bright);
+      font-weight: 700;
+    }
+
+    .output .muted {
+      color: var(--muted);
+    }
+
+    .output .cmd-name {
+      color: var(--accent);
+      font-weight: 700;
     }
 
     .fastfetch {
       display: flex;
       gap: 2rem;
       align-items: flex-start;
+      margin-bottom: 0.75rem;
     }
 
     .ascii-art {
-      color: var(--accent);
+      color: var(--link-hover-bg);
       white-space: pre;
       font-size: 5.5px;
       line-height: 1.15;
@@ -186,19 +220,13 @@
       height: 0.75rem;
     }
 
-    .footer {
-      max-width: 960px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 0.5rem 1.5rem 1rem;
-    }
-
-    .footer-prompt {
+    .input-line {
       display: flex;
-      align-items: center;
+      flex-wrap: wrap;
+      align-items: baseline;
     }
 
-    .footer-prompt .cursor-block {
+    .input-line .cursor-block {
       display: inline-block;
       width: 0.6em;
       height: 1.15em;
@@ -206,37 +234,21 @@
       margin-left: 2px;
       vertical-align: middle;
       animation: blink 1s step-end infinite;
+      align-self: center;
     }
 
-    .help-overlay {
-      display: none;
-      max-width: 960px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 2rem 1.5rem;
-      flex: 1;
-    }
-
-    .help-overlay h2 {
-      color: var(--accent);
-      font-size: 14px;
-      margin-bottom: 0.5rem;
-    }
-
-    .help-overlay p {
-      color: var(--text);
-      font-size: 14px;
-    }
-
-    .help-section {
-      margin-bottom: 1.5rem;
-    }
-
-    .help-key {
-      color: var(--accent);
-      font-weight: 700;
-      display: inline-block;
-      min-width: 6ch;
+    #hiddenInput {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      border: none;
+      padding: 0;
+      background: transparent;
+      color: transparent;
+      pointer-events: none;
     }
 
     @media (max-width: 768px) {
@@ -258,44 +270,12 @@
       .terminal {
         padding: 1rem;
       }
-
-      .footer {
-        padding: 0.5rem 1rem 1rem;
-      }
     }
   </style>
 </head>
 <body>
 
-  <div class="help-overlay" id="helpContainer">
-    <div class="help-section">
-      <h2>KEY BINDINGS</h2>
-      <p><span class="help-key">h</span>show help</p>
-      <p><span class="help-key">q</span>go back</p>
-      <p><span class="help-key">j</span>scroll down</p>
-      <p><span class="help-key">k</span>scroll up</p>
-      <p><span class="help-key">gg</span>scroll to top</p>
-      <p><span class="help-key">G</span>scroll to bottom</p>
-      <p><span class="help-key">1-9</span>relative movements</p>
-    </div>
-    <div class="help-section">
-      <h2>COMMANDS</h2>
-      <p>Type in the prompt below:</p>
-      <p><span class="help-key">help</span>show this help</p>
-      <p><span class="help-key">fastfetch</span>reload the page</p>
-      <p><span class="help-key">clear</span>clear and reload</p>
-    </div>
-    <div class="help-section">
-      <h2>SOURCE</h2>
-      <p><a href="https://github.com/laxita/laxita.github.io">https://github.com/laxita/laxita.github.io</a></p>
-    </div>
-  </div>
-
-  <div class="terminal" id="mainContainer">
-    <div class="prompt-line">
-      <span class="prompt-user">laxita@debian</span><span class="prompt-separator">:</span><span class="prompt-path">~</span><span class="prompt-dollar">$ </span><span class="prompt-cmd">fastfetch</span>
-    </div>
-
+  <template id="fastfetchTemplate">
     <div class="fastfetch">
       <div class="ascii-art" aria-hidden="true">
                                -.-+#-...
@@ -361,57 +341,9 @@
 
         <div class="section-gap"></div>
 
-        <div class="info-row">
-          <span class="info-label">Projects:</span>
-          <span class="info-value">
-            <!-- <a href="#">git-cliff</a>,
-            <a href="#">tuitar</a>,
-            <a href="#">binsider</a>,
-            <a href="#">systeroid</a>,
-            <a href="#">kmon</a> -->
-          </span>
-        </div>
-        <div class="info-row">
-          <span class="info-label"></span>
-          <!-- <span class="info-value">
-            <a href="#">menyoki</a>,
-            <a href="#">runst</a>,
-            <a href="#">halp</a>,
-            <a href="#">gpg-tui</a>,
-            <a href="#">rustypaste</a> -->
-          </span>
-        </div>
-        <div class="info-row">
-          <span class="info-label"></span>
-          <!-- <span class="info-value">
-            <a href="#">daktilo</a>,
-            <a href="#">linuxwave</a>,
-            <a href="#">coolmodfiles</a>,
-            <a href="#">more...</a> -->
-          </span>
-        </div>
-
-        <div class="section-gap"></div>
-
         <div class="info-row"><span class="info-label">GitHub:</span><span class="info-value"><a href="#">github.com/laxita</a></span></div>
         <div class="info-row"><span class="info-label">Blog:</span><span class="info-value"><a href="#">blog.laxita.dev</a></span></div>
         <div class="info-row"><span class="info-label">Resume:</span><span class="info-value"><a href="#">laxita.dev/resume</a></span></div>
-
-        <div class="section-gap"></div>
-
-        <div class="info-row"><span class="info-label">Contact:</span><span class="info-value">
-          <a href="#">email</a>,
-          <a href="#">x</a>,
-          <a href="#">linkedin</a>,
-          <a href="#">discord</a>,
-          <a href="#">mastodon</a>,
-          <a href="#">bsky</a>
-        </span></div>
-        <div class="info-row"><span class="info-label">Donate:</span><span class="info-value">
-          <a href="#">github sponsors</a>,
-          <a href="#">patreon</a>,
-          <a href="#">buymeacoffee</a>
-        </span></div>
 
         <div class="color-blocks">
           <span class="color-block" style="background:#0a0a08"></span>
@@ -435,13 +367,17 @@
         </div>
       </div>
     </div>
-  </div>
+  </template>
 
-  <div class="footer">
-    <div class="footer-prompt">
-      <span class="prompt-user">laxita@debian</span><span class="prompt-separator">:</span><span class="prompt-path">~</span><span class="prompt-dollar">$ </span><span id="promptInput" class="prompt-cmd"></span><span class="cursor-block" id="cursorBlock"></span>
+  <div class="terminal" id="terminal">
+    <div id="history"></div>
+
+    <div class="input-line" id="inputLine">
+      <span class="prompt-user">laxita@debian</span><span class="prompt-separator">:</span><span class="prompt-path" id="promptPath">~</span><span class="prompt-dollar">$&nbsp;</span><span id="promptInput" class="prompt-cmd"></span><span class="cursor-block"></span>
     </div>
   </div>
+
+  <input id="hiddenInput" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="terminal input" />
 
   <script src="script.js"></script>
 </body>
