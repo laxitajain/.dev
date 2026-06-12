@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="acorn.png" alt="acorn" width="72">
+  <img src="images/acorn.png" alt="acorn" width="72">
 </p>
 
 <h1 align="center">ssh laxita@laxita.dev</h1>
@@ -60,14 +60,15 @@ File nodes support an optional `acornId` field to award a collectible when someo
 | **Colours** | `:root` CSS variables (`--accent`, `--purple`, `--purple-bright`, …) |
 | **fastfetch panel** | `#fastfetchTemplate` — OS, host, kernel, links, color swatches |
 | **Squirrel art** | `.ascii-art` block inside the template |
-| **Favicon** | `<link rel="icon" href="acorn.png">` |
+| **Favicon** | `<link rel="icon" href="images/acorn.png">` |
 | **Terminal width** | `.terminal { width: 820px; }` — tweak to taste; JS refines from fastfetch on load |
 
-Replace `acorn.png` with your own favicon (square, transparent background works best).
+Replace `images/acorn.png` with your own favicon (square, transparent background works best).
 
 ### Assets
 
-- **`acorn.png`** — favicon + README mascot
+- **`images/acorn.png`** — favicon + README mascot
+- **`images/`** — source art (`acorn2.png`, `squirrel2.png`, `squirrel.png`)
 - **`CNAME`** — custom domain for GitHub Pages (`laxita.dev`)
 
 ## Getting started
@@ -98,11 +99,11 @@ After pushing, give it a minute, then hard-refresh (`Ctrl+Shift+R`) if you don't
 1. Edit **`FS_ROOT`** with your real projects, contact links, and about text
 2. Set **`BIRTHDATE`** to your actual date (`YYYY-MM-DD` with `T00:00:00`)
 3. Update the **fastfetch template** in `index.html` (host, packages, links)
-4. Swap **`acorn.png`** for your own mark
+4. Swap **`images/acorn.png`** for your own mark
 5. Push — GitHub Pages handles the rest
 
 ---
 
 <p align="center">
-  hidden <img src="acorn.png" alt="" width="20" style="vertical-align: -4px;">s reward the curious
+  hidden <img src="images/acorn.png" alt="" width="20" style="vertical-align: -4px;">s reward the curious
 </p>
