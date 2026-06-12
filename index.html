@@ -41,8 +41,7 @@
       background-color: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      text-align: center;
     }
 
     ::selection {
@@ -67,11 +66,11 @@
     }
 
     .terminal {
+      display: inline-block;
       max-width: 1500px;
-      width: 100%;
-      margin: 0 auto;
+      width: max-content;
+      text-align: left;
       padding: 2rem 1.5rem;
-      flex: 1;
       animation: fadeIn 0.4s ease-out;
     }
 
@@ -275,6 +274,9 @@
       }
 
       .terminal {
+        display: block;
+        width: 100%;
+        max-width: 100%;
         padding: 1rem;
       }
     }
