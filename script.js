@@ -1025,20 +1025,54 @@ hiddenInput.addEventListener("blur", function () {
   setTimeout(refocus, 0);
 });
 
-// Petting the squirrel (clicking the ASCII art) makes it squeak.
-const SQUEAKS = ["*squeak*", "*chitter*", "*happy tail flick*", "*squeak squeak*"];
+// Petting the squirrel (clicking the ASCII art) — chirp only, no log spam.
 historyEl.addEventListener("click", function (e) {
   if (e.target.closest(".ascii-art")) {
-    printHTML(
-      '<span class="muted">' +
-        SQUEAKS[Math.floor(Math.random() * SQUEAKS.length)] +
-        "</span>"
-    );
     playChirp();
     awardAcorn("pet");
     scrollToBottom();
   }
 });
+
+// Lock terminal to the fastfetch block width so prompts stay put after clear.
+let terminalWidth = null;
+let lockAttempts = 0;
+
+function lockTerminalWidth() {
+  const terminal = document.getElementById("terminal");
+  if (!terminal) return true;
+
+  if (window.matchMedia("(max-width: 768px)").matches) {
+    terminal.style.width = "";
+    return true;
+  }
+
+  if (terminalWidth === null) {
+    const fastfetch = document.querySelector(".fastfetch");
+    if (!fastfetch) return false;
+    const measured = Math.max(fastfetch.scrollWidth, fastfetch.offsetWidth);
+    if (measured < 100) return false;
+    const style = getComputedStyle(terminal);
+    terminalWidth = Math.ceil(
+      measured +
+        parseFloat(style.paddingLeft) +
+        parseFloat(style.paddingRight)
+    );
+  }
+
+  terminal.style.width = terminalWidth + "px";
+  return true;
+}
+
+function ensureTerminalWidth() {
+  if (!lockTerminalWidth() && lockAttempts++ < 120) {
+    requestAnimationFrame(ensureTerminalWidth);
+  }
+}
+
+window.addEventListener("resize", lockTerminalWidth);
+window.addEventListener("load", ensureTerminalWidth);
+document.fonts.ready.then(ensureTerminalWidth);
 
 // =========================================================================
 // Boot
@@ -1046,6 +1080,7 @@ historyEl.addEventListener("click", function (e) {
 
 echoPromptLine("fastfetch");
 COMMANDS.fastfetch();
+ensureTerminalWidth();
 const today = new Date();
 if (
   today.getMonth() === BIRTHDATE.getMonth() &&
