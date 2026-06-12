@@ -347,7 +347,7 @@ function awardAcorn(id) {
   localStorage.setItem("acorns", JSON.stringify(acornsFound));
   playChirp();
   printHTML(
-    '<span class="dir-name">(@) you found an acorn! (' +
+    '<span class="acorn">(@) you found an acorn! (' +
       acornsFound.length + "/" + TOTAL_ACORNS + ")</span> " +
       "<span class=\"muted\">— type 'acorns' to see your stash</span>"
   );
@@ -610,7 +610,7 @@ const COMMANDS = {
       .map((id) => (acornsFound.includes(id) ? "(@)" : "( )"))
       .join(" ");
     printHTML(
-      '<span class="dir-name">' + slots + "</span>  " +
+      '<span class="acorn">' + slots + "</span>  " +
         acornsFound.length + "/" + TOTAL_ACORNS + " acorns"
     );
     const missing = ids.filter((id) => !acornsFound.includes(id));
