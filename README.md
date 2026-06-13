@@ -10,7 +10,7 @@
 
 
 
-This is a template for a static, interactive portfolio that looks and feels like a Linux terminal. Visitors land on a `fastfetch`-style splash (colored block-art squirrel included), then explore your world with real shell commands — `cd`, `ls`, `cat`, `tree`, and more — instead of clicking through menus.
+This is a template for a static, interactive portfolio that looks and feels like a Linux terminal. Land on a `fastfetch`-style splash (colored block-art squirrel included), then explore your world with real shell commands — `cd`, `ls`, `cat`, `tree`, and more — instead of clicking through menus.
 
 There are no frameworks and no build step. Just HTML, CSS, and a single JavaScript file that powers a virtual filesystem, hidden collectibles, and a pile of reflex-test commands for the curious.
 
