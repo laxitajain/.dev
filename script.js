@@ -3,8 +3,14 @@
 //
 // Edit the content below to add your real projects, achievements, and
 // certificates. Files are { type: "file", content: "..." } — content may
-// contain HTML (e.g. <a href="...">links</a>). Directories are
-// { type: "dir", children: { ... } }.
+// contain HTML (e.g. <a href="...">links</a>). Project files under
+// projects/ may use { type: "file", project: { name, technologies,
+// description, liveAt? } } to render a bordered table on cat. Experience files
+// use { type: "file", experience: { name, role?, location?, dates?,
+// technologies?, description? } } with purple-accent blocks on cat. Certificate
+// files use { type: "file", cert: { title, issuer, date, desc, verify } }
+// or cert: { entries: [...] } for multiple credentials in one file.
+// Directories are { type: "dir", children: { ... } }.
 // =========================================================================
 
 const FS_ROOT = {
@@ -16,24 +22,68 @@ const FS_ROOT = {
         "README.txt": {
           type: "file",
           content:
-            "Things I've built. cat a file to learn more.\n" +
-            "(placeholder — real projects coming soon)",
+            "cat individual files for details.\n" +
+            "ls for the full list — active builds + find more on my github",
         },
-        "project-one.txt": {
+        "brain-tumor-mri.txt": {
           type: "file",
-          content:
-            "project-one\n" +
-            "-----------\n" +
-            "A placeholder project. Replace me with something real!\n" +
-            'repo: <a href="#">github.com/laxita/project-one</a>',
+          project: {
+            name: "Brain Tumor MRI",
+            technologies:
+              "Python, BRaTS Dataset, Segmentation and Morphological Algorithms",
+            description:
+              "Conducted a comprehensive ablation study using the BraTS dataset, showing that anisotropic diffusion filtering and top-hat correction can improve Dice similarity by up to 7%.\n\n" +
+              "To measure the contribution of preprocessing and morphological steps to segmentation performance, anisotropic diffusion filtering and top-hat correction can increase Dice similarity by up to 7%, highlighting the importance of well-thought-out classical preprocessing in tumor segmentation.\n\n" +
+              "The pipeline is especially curated for working with the Brain Tumor Segmentation Challenge Dataset (BraTS). Research paper on this work was presented at the IRTM Conference held at IIT Gandhinagar on 20th November 2025.",
+            liveAt: {
+              href: "https://drive.google.com/drive/folders/14D0MdPgdtskX--WHX4fQWanAk4actPdH?usp=drive_link",
+              label: "drive folder",
+            },
+          },
         },
-        "project-two.txt": {
+        "nextbite.txt": {
           type: "file",
-          content:
-            "project-two\n" +
-            "-----------\n" +
-            "Another placeholder project.\n" +
-            'repo: <a href="#">github.com/laxita/project-two</a>',
+          project: {
+            name: "NextBite",
+            technologies: "Next.js, MongoDB, Tailwind, Geolocation API",
+            description:
+              "Built a food redistribution platform aimed at reducing food waste and improving community sustainability.\n\n" +
+              "Connects donors such as restaurants, households, and cafes with recipients including NGOs, shelters, and individuals.\n\n" +
+              "Implements a zero-waste, zero-delivery model by scheduling urgency-based food pickups.",
+            liveAt: {
+              href: "https://next-bite-eta.vercel.app/",
+              label: "next-bite-eta.vercel.app",
+            },
+          },
+        },
+        "dragonfruit.txt": {
+          type: "file",
+          project: {
+            name: "Dragonfruit NL-to-SQL TUI IDE",
+            technologies: "Python, Textual, PyPi, Rich",
+            description:
+              "A Natural Language to SQL IDE for the terminal.\n\n" +
+              "A minimalist TUI that takes natural language (English) queries from the user and converts them into SQL queries which can be executed in place with robust IDE support.",
+            liveAt: {
+              href: "https://docs.google.com/document/d/1EY6khSM6qk2uXDqUK0U_7O6tlO2PfmyX/edit?usp=sharing",
+              label: "view project report",
+            },
+          },
+        },
+        "pylearn.txt": {
+          type: "file",
+          project: {
+            name: "PyLearn",
+            technologies: "Python, Jupyter Notebook, GitHub, Git",
+            description:
+              "Authored a repository covering basic to advanced topics and concepts in Python.\n\n" +
+              "Beginner-friendly usage with section-wise codes for topics like conditional statements, collection types, and more.\n\n" +
+              "Also covered libraries like NumPy and Pandas.",
+            liveAt: {
+              href: "https://github.com/laxitajain/pyLearn",
+              label: "github.com/laxitajain/pyLearn",
+            },
+          },
         },
       },
     },
@@ -42,11 +92,74 @@ const FS_ROOT = {
       children: {
         "README.txt": {
           type: "file",
-          content: "Milestones and wins. (placeholder — fill me in)",
+          content: "Scholarships, contests, open source, and academic wins.",
         },
-        "hackathon.txt": {
+        "talentsprint-we.txt": {
           type: "file",
-          content: "Won a hackathon (placeholder — replace with the real story).",
+          content:
+            "TalentSprint WE Scholar, Supported by Google\n" +
+            "Feb 2024 – March 2026\n" +
+            "Selection rate: 0.01%\n" +
+            "\n" +
+            "Selected out of over 30,000 participants for a two-year program\n" +
+            "after 5 intensive shortlisting rounds.\n" +
+            "\n" +
+            "Received full program scholarship by Google and an additional\n" +
+            "Rs. 1,00,000.\n" +
+            "\n" +
+            "Attended a three-week bootcamp at IIIT-H, worked in a\n" +
+            "corporate-like environment in teams with peers.\n" +
+            "\n" +
+            "Studied foundational ML concepts from one of the leading\n" +
+            "instructors in India.",
+        },
+        "reliance-scholar.txt": {
+          type: "file",
+          content:
+            "Reliance Foundation UG Scholar\n" +
+            "Feb 2024 – Present\n" +
+            "\n" +
+            "Topped the nation-wide aptitude test.\n" +
+            "\n" +
+            "Selected for a four-year scholarship program for first-year\n" +
+            "undergraduates, with an amount of Rs. 2,00,000.",
+        },
+        "open-source.txt": {
+          type: "file",
+          content:
+            "Open Source\n" +
+            "\n" +
+            "Merged PRs across organizations like freeCodeCamp, MDN Web Docs,\n" +
+            "and others.",
+        },
+        "university-rank.txt": {
+          type: "file",
+          content:
+            "University Rank\n" +
+            "\n" +
+            "Appeared with Rank 1 in the Dean's list everytime it was issued!\n" +
+            "\n" +
+            "The only one in the university with a 4.00/4.00 GPA in the 3rd\n" +
+            "semester, across all other branches as well.",
+        },
+        "miscellaneous.txt": {
+          type: "file",
+          content:
+            "Miscellaneous\n" +
+            "\n" +
+            "CISCE Examinations (May 2021)\n" +
+            "The first girl student in the school to secure Rank 1 in 10th\n" +
+            "examinations. Achieved the highest percentage ever in the school\n" +
+            "(99.0). Rank 1 in the Nashik Centre (Regional).\n" +
+            "\n" +
+            "Institute for Promotion of Mathematics (July 2013)\n" +
+            "Certificate of Distinction in the All India Open Mathematics\n" +
+            "Scholarship Examination.\n" +
+            "\n" +
+            "SIP Prodigy, ABACUS Brain Gym Contest (September 2011)\n" +
+            "1st runner up in the Regional Abacus Prodigy Competition, Khandesh\n" +
+            "region. A rigorous, high-pressure environment testing speed, mental\n" +
+            "calculation skills, and logical thinking.",
         },
       },
     },
@@ -55,32 +168,136 @@ const FS_ROOT = {
       children: {
         "README.txt": {
           type: "file",
-          content: "Certificates and credentials. (placeholder — fill me in)",
-        },
-        "certificate-one.txt": {
-          type: "file",
           content:
-            "Certificate One — Issuing Org, 2026 (placeholder)\n" +
-            'verify: <a href="#">link</a>',
+            "NPTEL and Coursera credentials.\n" +
+            "\n" +
+            "Hint: use 'open <certificate>.cert' to view credentials.",
+        },
+        "iit-kgp-dbms.cert": {
+          type: "file",
+          cert: {
+            title: "Database Management Systems",
+            issuer: "IIT Kharagpur, NPTEL",
+            date: "October 2025",
+            desc:
+              "Gold Medalist — Top 1% in the country. Solved all assignments (involving quizzes and programming questions) with exemplary grades and appeared among the top 1% of candidates in the country in the final proctored online assessment. Awarded with the Gold + Elite Certification.",
+            verify: {
+              href: "https://drive.google.com/file/d/1zBMzwyCeoV-ONvd-9iVI9JqA55qK-yvW/view?usp=sharing",
+            },
+          },
+        },
+        "cmi-daa.cert": {
+          type: "file",
+          cert: {
+            title: "Design and Analysis of Algorithms",
+            issuer: "Chennai Mathematical Institute, NPTEL",
+            date: "March 2025",
+            desc:
+              "Silver — Top 5% in the country. Solved all assignments (involving quizzes and programming questions) with exemplary grades and appeared among the top 5% of candidates in the country in the final proctored online assessment. Awarded with the Elite + Silver Certification.",
+            verify: {
+              href: "https://drive.google.com/file/d/1WkSb6R-wHBHfDUYxqn2gOBoRX0Ip36Nc/view?usp=sharing",
+            },
+          },
+        },
+        "deeplearning.ai.cert": {
+          type: "file",
+          cert: {
+            entries: [
+              {
+                title: "Neural Networks and Deep Learning",
+                issuer: "DeepLearning.AI (Coursera)",
+                date: "December 2024",
+                desc:
+                  "Grade: 96.12%. Completed a thorough course covering Artificial Neural Networks, backpropagation, and neural network architecture.",
+                verify: {
+                  href: "https://coursera.org/share/ad729bdf951fc3d1a94e15078b8201fc",
+                },
+              },
+              {
+                title: "Improving Deep Neural Networks",
+                issuer: "DeepLearning.AI (Coursera)",
+                date: "January 2025",
+                desc:
+                  "Grade: 95.19%. Hyperparameter tuning, mathematical optimization, and familiarity with TensorFlow.",
+                verify: {
+                  href: "https://coursera.org/share/7eb61df4fa9d056cfb3a608f34cdf5ad",
+                },
+              },
+              {
+                title: "Structuring Machine Learning Projects",
+                issuer: "DeepLearning.AI (Coursera)",
+                date: "January 2025",
+                desc:
+                  "Grade: 90.00%. Diagnosing errors in ML systems; prioritizing strategies for reducing errors; mismatched training/test sets; surpassing human-level performance; end-to-end learning, transfer learning, and multi-task learning.",
+                verify: {
+                  href: "https://coursera.org/share/8ee84f84d335c8d1f6dc37a78df4843a",
+                },
+              },
+            ],
+          },
+        },
+      },
+    },
+    "experience": {
+      type: "dir",
+      children: {
+        "README.txt": {
+          type: "file",
+          content: "Internships and work experience. cat a file for details.",
+        },
+        "1xl-universe.txt": {
+          type: "file",
+          experience: {
+            name: "1XL Universe",
+            role: "Software Developer Intern",
+            location: "Dubai, UAE (on-site)",
+            dates: "May 2026 – July 2026",
+            technologies:
+              "Next.js, Supabase, AI integrations, Chrome Extension API",
+            description:
+              "Developed an AI-powered internal training and communication quality platform focused on role-based assessments, analytics, and AI-assisted feedback systems.\n\n" +
+              "Worked with Next.js, Tailwind CSS, backend APIs, and AI integrations for quiz generation and performance analysis.\n\n" +
+              "Participated in Agile workflows, daily stand-up meetings, and collaborative development with cross-functional teams.\n\n" +
+              "Gained exposure to large-scale international business operations and real-world product development.",
+          },
+        },
+        "transcyberntics.txt": {
+          type: "file",
+          experience: {
+            name: "TransCybernetics",
+            role: "Software Engineer Intern",
+            dates: "December 2025 – March 2026",
+            technologies:
+              "Next.js, Tailwind CSS, Zod, Shadcn UI, MongoDB, Node.js",
+            description:
+              "Worked in the Software Development Team, with the tech stack involving Next.js, Tailwind CSS, Zod, Shadcn UI, MongoDB and Node.js.\n\n" +
+              "Assisted in simplifying backend logics, implementing robust authentication and improving UI/UX.",
+          },
         },
       },
     },
     "about.txt": {
       type: "file",
       content:
-        "hi, i'm laxita.\n" +
-        "21. debian. neovim. i3. building things on the internet.",
+        "Hi, I'm Laxita Jain.\n" +
+        "\n" +
+        "I am a final year student in B.Tech., CS. I am focused on readily honing\n" +
+        "my skills in problem-solving. My experience spans Next.js, Redux,\n" +
+        "MongoDB, Node.js, CLI utilities and Machine Learning applications. I\n" +
+        "spend most of my time studying algorithms, solving problems, reading\n" +
+        "research in AI and contributing to open source.\n" +
+        "\n" +
+        "Beyond tech, I am an avid reader, an occasional writer and a philosophy\n" +
+        "nerd! I value integrity and enjoy engaging in intellectual\n" +
+        "conversations! :)",
     },
     "contact.txt": {
       type: "file",
       content:
-        'email:    <a href="#">hello@laxita.dev</a>\n' +
-        'github:   <a href="#">github.com/laxita</a>\n' +
-        'x:        <a href="#">x.com/laxita</a>\n' +
-        'linkedin: <a href="#">linkedin.com/in/laxita</a>\n' +
-        'discord:  <a href="#">laxita</a>\n' +
-        'mastodon: <a href="#">@laxita</a>\n' +
-        'bsky:     <a href="#">@laxita.dev</a>',
+        'email:    <a href="mailto:laxitajain912@gmail.com">laxitajain912@gmail.com</a>\n' +
+        'github:   <a href="https://github.com/laxitajain">github.com/laxitajain</a>\n' +
+        'linkedin: <a href="https://linkedin.com/in/laxitajain912">linkedin.com/in/laxitajain912</a>\n' +
+        'codolio:  <a href="https://codolio.com/profile/lax">codolio.com/profile/lax</a>',
     },
     ".acorns": {
       type: "file",
@@ -230,6 +447,128 @@ function escapeHTML(str) {
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
+}
+
+function renderProjectTable(project) {
+  const rows = [
+    ["technologies", escapeHTML(project.technologies)],
+    [
+      "description",
+      escapeHTML(project.description).replace(/\n/g, "<br>"),
+    ],
+  ];
+
+  if (project.liveAt) {
+    rows.push([
+      "live at",
+      '<a href="' +
+        escapeHTML(project.liveAt.href) +
+        '">' +
+        escapeHTML(project.liveAt.label) +
+        "</a>",
+    ]);
+  }
+
+  const body = rows
+    .map(
+      ([label, value]) =>
+        "<tr><th>" + label + "</th><td>" + value + "</td></tr>"
+    )
+    .join("");
+
+  return (
+    '<fieldset class="project-card">' +
+    "<legend>" +
+    escapeHTML(project.name) +
+    "</legend>" +
+    '<table class="project-table">' +
+    body +
+    "</table></fieldset>"
+  );
+}
+
+function renderExperienceTable(exp) {
+  const rows = [];
+
+  if (exp.role) {
+    rows.push(["role", escapeHTML(exp.role)]);
+  }
+  if (exp.location) {
+    rows.push(["location", escapeHTML(exp.location)]);
+  }
+  if (exp.dates) {
+    rows.push(["dates", escapeHTML(exp.dates)]);
+  }
+  if (exp.technologies) {
+    rows.push(["technologies", escapeHTML(exp.technologies)]);
+  }
+  if (exp.description) {
+    rows.push([
+      "description",
+      escapeHTML(exp.description).replace(/\n/g, "<br>"),
+    ]);
+  }
+
+  const body = rows
+    .map(
+      ([label, value]) =>
+        "<tr><th>" + label + "</th><td>" + value + "</td></tr>"
+    )
+    .join("");
+
+  return (
+    '<fieldset class="experience-card">' +
+    "<legend>" +
+    escapeHTML(exp.name) +
+    "</legend>" +
+    '<table class="experience-table">' +
+    body +
+    "</table></fieldset>"
+  );
+}
+
+function renderCertVerifyLink(href) {
+  return (
+    '<a class="cert-verify-link" href="' +
+    escapeHTML(href) +
+    '" target="_blank" rel="noopener noreferrer">verify certificate</a>'
+  );
+}
+
+function renderCertEntry(entry) {
+  const rows = [
+    ["Title:", escapeHTML(entry.title)],
+    ["Issuer:", escapeHTML(entry.issuer)],
+    ["Date:", escapeHTML(entry.date)],
+    ["Desc:", escapeHTML(entry.desc)],
+  ]
+    .map(
+      ([key, value]) =>
+        "<tr><th>" + key + "</th><td>" + value + "</td></tr>"
+    )
+    .join("");
+
+  const verify = entry.verify
+    ? '<div class="cert-verify">' +
+      renderCertVerifyLink(entry.verify.href) +
+      "</div>"
+    : "";
+
+  return (
+    '<div class="cert-entry">' +
+    '<table class="cert-table">' +
+    rows +
+    "</table>" +
+    verify +
+    "</div>"
+  );
+}
+
+function renderCertBox(cert) {
+  if (cert.entries) {
+    return cert.entries.map(renderCertEntry).join("");
+  }
+  return renderCertEntry(cert);
 }
 
 function scrollToBottom() {
@@ -404,6 +743,7 @@ const COMMANDS = {
         '  <span class="cmd-name">cd</span> &lt;dir&gt;       change directory',
         '  <span class="cmd-name">pwd</span>            print working directory',
         '  <span class="cmd-name">cat</span> &lt;file&gt;     print file contents',
+        '  <span class="cmd-name">open</span> &lt;file&gt;    view a certificate (.cert)',
         '  <span class="cmd-name">tree</span>           show the directory tree',
         '  <span class="cmd-name">fastfetch</span>      show system info',
         '  <span class="cmd-name">echo</span> &lt;text&gt;    print text',
@@ -507,11 +847,42 @@ const COMMANDS = {
         printError("cat: " + target + ": No such file or directory");
       } else if (resolved.node.type === "dir") {
         printError("cat: " + target + ": Is a directory");
+      } else if (resolved.node.project) {
+        printHTML(renderProjectTable(resolved.node.project));
+        if (resolved.node.acornId) {
+          awardAcorn(resolved.node.acornId);
+        }
+      } else if (resolved.node.experience) {
+        printHTML(renderExperienceTable(resolved.node.experience));
+        if (resolved.node.acornId) {
+          awardAcorn(resolved.node.acornId);
+        }
+      } else if (resolved.node.cert) {
+        printError("cat: " + target + ": Permission denied");
       } else {
         printHTML(resolved.node.content);
         if (resolved.node.acornId) {
           awardAcorn(resolved.node.acornId);
         }
+      }
+    }
+  },
+
+  open(args) {
+    if (args.length === 0) {
+      printError("open: missing operand");
+      return;
+    }
+    for (const target of args) {
+      const resolved = resolvePath(target);
+      if (!resolved) {
+        printError("open: " + target + ": No such file or directory");
+      } else if (resolved.node.type === "dir") {
+        printError("open: " + target + ": Is a directory");
+      } else if (resolved.node.cert) {
+        printHTML(renderCertBox(resolved.node.cert));
+      } else {
+        printError("open: " + target + ": not a certificate file");
       }
     }
   },
@@ -634,7 +1005,7 @@ const COMMANDS = {
       "you dug up:\n" +
         "  - one (1) slightly chewed acorn\n" +
         "  - a note: \"you explore the way i do. i like that.\n" +
-        '     say hi sometime — <a href="#">hello@laxita.dev</a>"'
+        '     say hi sometime — <a href="mailto:laxitajain912@gmail.com">laxitajain912@gmail.com</a>"'
     );
     awardAcorn("riddle");
   },

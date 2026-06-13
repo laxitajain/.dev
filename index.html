@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <title>ssh laxita@laxita.dev</title>
+  <title>ssh user@laxita.dev</title>
   <style>
     * {
       box-sizing: border-box;
@@ -143,6 +143,129 @@
     .output .acorn {
       color: var(--purple-bright);
       font-weight: 700;
+    }
+
+    .output:has(.project-card),
+    .output:has(.experience-card),
+    .output:has(.cert-entry) {
+      white-space: normal;
+    }
+
+    .project-card {
+      border: 1px solid var(--accent-dim);
+      padding: 0.35rem 1rem 0.75rem;
+      margin: 0.25rem 0 0.5rem;
+      display: inline-block;
+      min-width: min(100%, 38rem);
+      max-width: 100%;
+    }
+
+    .project-card legend {
+      color: var(--accent-bright);
+      font-weight: 700;
+      padding: 0 0.4rem;
+    }
+
+    .project-table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .project-table th {
+      color: var(--accent);
+      font-weight: 700;
+      text-align: left;
+      vertical-align: top;
+      padding: 0.35rem 1.25rem 0.35rem 0;
+      white-space: nowrap;
+    }
+
+    .project-table td {
+      vertical-align: top;
+      padding: 0.35rem 0;
+    }
+
+    .experience-card {
+      border: 1px solid rgba(178, 148, 209, 0.45);
+      padding: 0.35rem 1rem 0.75rem;
+      margin: 0.25rem 0 0.5rem;
+      display: inline-block;
+      min-width: min(100%, 38rem);
+      max-width: 100%;
+    }
+
+    .experience-card legend {
+      color: var(--purple-bright);
+      font-weight: 700;
+      padding: 0 0.4rem;
+    }
+
+    .experience-table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .experience-table th {
+      color: var(--purple-bright);
+      font-weight: 700;
+      text-align: left;
+      vertical-align: top;
+      padding: 0.35rem 1.25rem 0.35rem 0;
+      white-space: nowrap;
+    }
+
+    .experience-table td {
+      vertical-align: top;
+      padding: 0.35rem 0;
+    }
+
+    .cert-entry {
+      margin-bottom: 0.75rem;
+    }
+
+    .cert-entry:last-child {
+      margin-bottom: 0;
+    }
+
+    .cert-table {
+      border-collapse: collapse;
+      border: none;
+    }
+
+    .cert-table th,
+    .cert-table td {
+      border: none;
+      vertical-align: top;
+      padding: 0.2rem 0;
+      text-align: left;
+    }
+
+    .cert-table th {
+      color: var(--purple-bright);
+      font-weight: 700;
+      padding-right: 1rem;
+      white-space: nowrap;
+    }
+
+    .cert-table td {
+      color: var(--accent-bright);
+    }
+
+    .cert-verify {
+      margin-top: 0.35rem;
+    }
+
+    .cert-verify-link {
+      display: inline-block;
+      background-color: var(--purple);
+      color: var(--accent-bright);
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+    }
+
+    .cert-verify-link:hover {
+      background-color: var(--link-hover-bg);
+      color: var(--accent-bright);
     }
 
     .fastfetch {
@@ -353,7 +476,7 @@
         <div class="info-row"><span class="info-label">Host:</span><span class="info-value">laxita.dev</span></div>
         <div class="info-row"><span class="info-label">Kernel:</span><span class="info-value">6.12.88+deb13-amd64</span></div>
         <div class="info-row"><span class="info-label">Uptime:</span><span class="info-value">20 years</span></div>
-        <div class="info-row"><span class="info-label">Packages:</span><span class="info-value">python3, javascript, rust, go</span></div>
+        <div class="info-row"><span class="info-label">Packages:</span><span class="info-value">cpp, python, javascript, go</span></div>
         <div class="info-row"><span class="info-label">Shell:</span><span class="info-value">zsh 5.9</span></div>
         <div class="info-row"><span class="info-label">Editor:</span><span class="info-value">neovim</span></div>
         <div class="info-row"><span class="info-label">Terminal:</span><span class="info-value">alacritty</span></div>
@@ -361,9 +484,9 @@
 
         <div class="section-gap"></div>
 
-        <div class="info-row"><span class="info-label">GitHub:</span><span class="info-value"><a href="#">github.com/laxita</a></span></div>
-        <div class="info-row"><span class="info-label">Blog:</span><span class="info-value"><a href="#">blog.laxita.dev</a></span></div>
-        <div class="info-row"><span class="info-label">Resume:</span><span class="info-value"><a href="#">laxita.dev/resume</a></span></div>
+        <div class="info-row"><span class="info-label">Synopsis:</span><span class="info-value">An aspiring SWE building full-stack apps, learning systems and Linux and exploring open source.</span></div>
+        <div class="info-row"><span class="info-label">GitHub:</span><span class="info-value">github.com/laxita</span></div>
+        <div class="info-row"><span class="info-label">Grind:</span><span class="info-value">codolio.com/profile/lax</span></div>
 
         <div class="color-blocks">
           <span class="color-block" style="background:#0a0a08"></span>
