@@ -5,10 +5,6 @@
   A terminal-style personal site — browse projects, chase hidden acorns, and pretend you're on Debian.
 </p>
 
-<p align="center">
-  <a href="https://laxita.dev">laxita.dev</a>
-</p>
-
 <img width="1508" height="885" alt="image" src="https://github.com/user-attachments/assets/059d2e13-4b18-4417-ac9e-4cf86d533942" />
 
 
