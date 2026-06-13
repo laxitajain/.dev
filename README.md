@@ -5,10 +5,9 @@
   A terminal-style personal site~ browse projects, chase hidden acorns, and pretend you're on Debian.
 </p>
 
-<img width="1508" height="885" alt="image" src="https://github.com/user-attachments/assets/059d2e13-4b18-4417-ac9e-4cf86d533942" />
+<!-- <img width="1508" height="885" alt="image" src="https://github.com/user-attachments/assets/059d2e13-4b18-4417-ac9e-4cf86d533942" /> -->
 
 
----
 
 This is a template for a static, interactive portfolio that looks and feels like a Linux terminal. Visitors land on a `fastfetch`-style splash (colored block-art squirrel included), then explore your world with real shell commands — `cd`, `ls`, `cat`, `tree`, and more — instead of clicking through menus.
 
