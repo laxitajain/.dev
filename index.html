@@ -41,6 +41,7 @@
       background-color: var(--bg);
       color: var(--text);
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     ::selection {
@@ -57,6 +58,7 @@
       color: var(--accent);
       text-decoration: none;
       font-weight: 700;
+      overflow-wrap: anywhere;
     }
 
     a:hover {
@@ -65,11 +67,11 @@
     }
 
     .terminal {
-      width: 820px;
+      width: min(100%, 820px);
       max-width: 100%;
       margin: 0 auto;
       box-sizing: border-box;
-      padding: 2rem 1.5rem;
+      padding: clamp(1rem, 4vw, 2rem) clamp(1rem, 4vw, 1.5rem);
       animation: fadeIn 0.4s ease-out;
     }
 
@@ -116,7 +118,7 @@
 
     .output {
       white-space: pre-wrap;
-      word-break: break-word;
+      overflow-wrap: break-word;
       margin-bottom: 0.75rem;
     }
 
@@ -124,6 +126,8 @@
       white-space: pre;
       word-break: normal;
       overflow-x: auto;
+      max-width: 100%;
+      -webkit-overflow-scrolling: touch;
     }
 
     .output .dir-name {
@@ -158,6 +162,7 @@
       display: inline-block;
       min-width: min(100%, 38rem);
       max-width: 100%;
+      overflow: hidden;
     }
 
     .project-card legend {
@@ -169,6 +174,7 @@
     .project-table {
       border-collapse: collapse;
       width: 100%;
+      table-layout: fixed;
     }
 
     .project-table th {
@@ -183,6 +189,7 @@
     .project-table td {
       vertical-align: top;
       padding: 0.35rem 0;
+      overflow-wrap: anywhere;
     }
 
     .experience-card {
@@ -192,6 +199,7 @@
       display: inline-block;
       min-width: min(100%, 38rem);
       max-width: 100%;
+      overflow: hidden;
     }
 
     .experience-card legend {
@@ -203,6 +211,7 @@
     .experience-table {
       border-collapse: collapse;
       width: 100%;
+      table-layout: fixed;
     }
 
     .experience-table th {
@@ -217,6 +226,7 @@
     .experience-table td {
       vertical-align: top;
       padding: 0.35rem 0;
+      overflow-wrap: anywhere;
     }
 
     .cert-entry {
@@ -230,6 +240,8 @@
     .cert-table {
       border-collapse: collapse;
       border: none;
+      max-width: 100%;
+      table-layout: fixed;
     }
 
     .cert-table th,
@@ -249,6 +261,7 @@
 
     .cert-table td {
       color: var(--accent-bright);
+      overflow-wrap: anywhere;
     }
 
     .cert-verify {
@@ -270,9 +283,10 @@
 
     .fastfetch {
       display: flex;
-      gap: 2rem;
+      gap: clamp(1rem, 4vw, 2rem);
       align-items: flex-start;
       margin-bottom: 0.75rem;
+      max-width: 100%;
     }
 
     .ascii-art {
@@ -282,6 +296,8 @@
       line-height: 1.15;
       flex-shrink: 0;
       user-select: none;
+      max-width: 100%;
+      overflow: hidden;
     }
 
     .info {
@@ -326,6 +342,8 @@
 
     .info-value {
       color: var(--text);
+      min-width: 0;
+      overflow-wrap: anywhere;
     }
 
     .info-value a {
@@ -352,6 +370,7 @@
       display: flex;
       flex-wrap: wrap;
       align-items: baseline;
+      overflow-wrap: anywhere;
     }
 
     .input-line .cursor-block {
@@ -381,23 +400,80 @@
 
     @media (max-width: 768px) {
       body {
-        font-size: 12px;
+        font-size: 12.5px;
       }
 
       .fastfetch {
         flex-direction: column;
-        gap: 1rem;
+        gap: 0.85rem;
       }
 
       .ascii-art {
-        font-size: 3.5px;
+        font-size: clamp(2px, 0.9vw, 3.5px);
         line-height: 1.1;
-        text-align: center;
       }
 
       .terminal {
-        width: 100% !important;
-        padding: 1rem;
+        padding: 1rem 0.85rem 1.25rem;
+      }
+
+      .project-card,
+      .experience-card {
+        width: 100%;
+        padding: 0.35rem 0.7rem 0.75rem;
+      }
+
+      .project-table,
+      .project-table tbody,
+      .project-table tr,
+      .project-table th,
+      .project-table td,
+      .experience-table,
+      .experience-table tbody,
+      .experience-table tr,
+      .experience-table th,
+      .experience-table td,
+      .cert-table,
+      .cert-table tbody,
+      .cert-table tr,
+      .cert-table th,
+      .cert-table td {
+        display: block;
+        width: 100%;
+      }
+
+      .project-table th,
+      .experience-table th,
+      .cert-table th {
+        padding: 0.45rem 0 0;
+        white-space: normal;
+      }
+
+      .project-table td,
+      .experience-table td,
+      .cert-table td {
+        padding: 0.1rem 0 0.35rem;
+      }
+
+      .color-block {
+        flex: 1 1 0;
+        min-width: 2ch;
+      }
+    }
+
+    @media (max-width: 420px) {
+      body {
+        font-size: 12px;
+      }
+
+      .terminal {
+        padding-inline: 0.65rem;
+      }
+
+      .prompt-user,
+      .prompt-path {
+        max-width: 100%;
+        overflow-wrap: anywhere;
       }
     }
   </style>
