@@ -1191,12 +1191,9 @@ const COMMANDS = {
   },
 
   github() {
-    window.open("https://github.com/laxita", "_blank");
+    window.open("https://github.com/laxitajain", "_blank");
   },
 
-  blog() {
-    window.open("https://blog.laxita.dev", "_blank");
-  },
 };
 
 COMMANDS.neofetch = COMMANDS.fastfetch;
